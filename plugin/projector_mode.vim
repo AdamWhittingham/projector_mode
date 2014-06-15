@@ -15,15 +15,14 @@
 " Licensed under the WTFPL 2.0 (Do What the Fuck You Want to Public License)
 
 let g:projector_scheme_name = ''
-let s:pattern = '^\(.*\)\([1-9][0-9]*\)$'
-let s:projector_font_size = 16
+let s:projector_font_size = 18
 
 function! ToggleProjectorMode()
   if (g:colors_name != g:projector_scheme_name)
     exec "color ". g:projector_colorscheme
     let g:projector_scheme_name = g:colors_name
     let w:original_font = &guifont
-    let &guifont = substitute(&guifont, s:pattern, '\1', '').s:projector_font_size
+    let &guifont = substitute(&guifont, "[0-9]\\+$", s:projector_font_size, "")
   else
     exec "color ". g:default_colorscheme
     let &guifont = w:original_font
